@@ -4,6 +4,8 @@ require "image_optim"
 module Paperclip
   class PaperclipOptimizer < Processor
     def make
+      return @file if File.extname(@file.path) == "tiff"
+
       settings = (@options[:paperclip_optimizer] || {}).reverse_merge(::PaperclipOptimizer::DEFAULT_SETTINGS)
 
       src_path = File.expand_path(@file.path)
